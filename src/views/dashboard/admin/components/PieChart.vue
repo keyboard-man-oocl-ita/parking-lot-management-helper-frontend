@@ -21,6 +21,18 @@ export default {
     height: {
       type: String,
       default: '300px'
+    },
+    statistic: {
+      type: Array,
+      default: () => []
+    },
+    name: {
+      type: String,
+      default: ''
+    },
+    clerk: {
+      type: String,
+      default: ''
     }
   },
   data() {
@@ -45,6 +57,10 @@ export default {
       this.chart = echarts.init(this.$el, 'macarons')
 
       this.chart.setOption({
+        title: {
+          text: this.name,
+          subtext: `由${this.clerk}管理`
+        },
         tooltip: {
           trigger: 'item',
           formatter: '{a} <br/>{b} : {c} ({d}%)'
@@ -52,22 +68,16 @@ export default {
         legend: {
           left: 'center',
           bottom: '10',
-          data: ['Industries', 'Technology', 'Forex', 'Gold', 'Forecasts']
+          data: ['剩余', '已占用']
         },
         series: [
           {
-            name: 'WEEKLY WRITE ARTICLES',
+            name: '停车情况',
             type: 'pie',
             roseType: 'radius',
             radius: [15, 95],
             center: ['50%', '38%'],
-            data: [
-              { value: 320, name: 'Industries' },
-              { value: 240, name: 'Technology' },
-              { value: 149, name: 'Forex' },
-              { value: 100, name: 'Gold' },
-              { value: 59, name: 'Forecasts' }
-            ],
+            data: this.statistic,
             animationEasing: 'cubicInOut',
             animationDuration: 2600
           }
