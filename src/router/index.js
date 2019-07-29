@@ -109,7 +109,7 @@ export const asyncRoutes = [
         path: 'index',
         component: () => import('@/views/clerk-management/index'),
         name: 'clerk-management',
-        meta: { title: '员工管理', icon: 'icon', noCache: true }
+        meta: { title: '员工管理', icon: 'peoples', noCache: true }
       }
     ]
   },
@@ -122,7 +122,7 @@ export const asyncRoutes = [
         path: 'index',
         component: () => import('@/views/parkinglot-management/index'),
         name: 'parkinglot-management',
-        meta: { title: '停车场管理', icon: 'icon', noCache: true }
+        meta: { title: '停车场管理', icon: 'parkinglot', noCache: true }
       }
     ]
   },
@@ -135,7 +135,7 @@ export const asyncRoutes = [
         path: 'index',
         component: () => import('@/views/parkingboy-management/index'),
         name: 'parkingboy-management',
-        meta: { title: '停车员管理', icon: 'icon', noCache: true }
+        meta: { title: '停车员管理', icon: 'clerk', noCache: true }
       }
     ]
   },
@@ -148,7 +148,7 @@ export const asyncRoutes = [
         path: 'index',
         component: () => import('@/views/order-management/index'),
         name: 'order-management',
-        meta: { title: '订单管理', icon: 'icon', noCache: true }
+        meta: { title: '订单管理', icon: 'documentation', noCache: true }
       }
     ]
   },
