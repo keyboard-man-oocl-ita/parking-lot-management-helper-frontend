@@ -42,7 +42,7 @@ export default {
         label: '默认'
       }],
       carLicense: '',
-      condition: ''
+      condition: -1
     }
   },
   methods: {
