@@ -19,7 +19,7 @@ export default {
   },
   methods: {
     updateCurrentPage(curr) {
-      this.$store.dispatch('setCurrentPage', curr)
+      this.$store.dispatch('order/setCurrentPage', curr)
     }
   }
 }

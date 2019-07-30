@@ -3,13 +3,14 @@ import { fetchOrder } from '@/api/order'
 const state = {
   orders: [],
   total: 0,
-  currentPage: 0
+  currentPage: -1
 }
 
 const mutations = {
   LOAD_ORDERS: (state, orders) => {
     state.orders = orders
     state.total = orders.length
+    state.currentPage = 1
   },
   SET_CURRENT_PAGE: (state, index) => {
     state.currentPage = index
