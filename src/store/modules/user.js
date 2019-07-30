@@ -31,14 +31,13 @@ const mutations = {
 const actions = {
   // user login
   login({ commit, dispatch }, userInfo) {
-    const { username, password } = userInfo
+    const { phoneNumber, password } = userInfo
     return new Promise((resolve, reject) => {
-      login({ username: username.trim(), password: password }).then(async response => {
-        const { data } = response
-        commit('SET_TOKEN', data.token)
-        setToken(data.token)
-        commit('SET_ROLES', [data.role])
-        const accessRoutes = await dispatch('permission/generateRoutes', [data.role], { root: true })
+      login({ phoneNumber: phoneNumber.trim(), password: password, role: 'clerk' }).then(async response => {
+        commit('SET_TOKEN', response.token)
+        setToken(response.token)
+        commit('SET_ROLES', ['admin'])
+        const accessRoutes = await dispatch('permission/generateRoutes', ['admin'], { root: true })
         router.addRoutes(accessRoutes)
         resolve()
       }).catch(error => {
