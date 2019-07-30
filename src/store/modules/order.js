@@ -1,9 +1,10 @@
-import { fetchOrder } from '@/api/order'
+import { fetchOrder, patchOrder } from '@/api/order'
 
 const state = {
   orders: [],
   total: 0,
-  currentPage: -1
+  currentPage: -1,
+  orderSelected: ''
 }
 
 const mutations = {
@@ -17,6 +18,9 @@ const mutations = {
   },
   SET_TOTAL: (state, total) => {
     state.total = total
+  },
+  SET_ORDER_SELECTED: (state, order) => {
+    state.orderSelected = order
   }
 }
 
@@ -30,6 +34,12 @@ const actions = {
   },
   setTotal({ commit }, total) {
     commit('SET_TOTAL', total)
+  },
+  setOrderSelected({ commit }, order) {
+    commit('SET_ORDER_SELECTED', order)
+  },
+  async updateOrder({ commit }, order) {
+    await patchOrder(order)
   }
 }
 

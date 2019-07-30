@@ -7,3 +7,11 @@ export function fetchOrder(params) {
     params: params
   })
 }
+
+export function patchOrder(data) {
+  return request({
+    url: '/orders',
+    method: 'put',
+    data: data
+  })
+}
