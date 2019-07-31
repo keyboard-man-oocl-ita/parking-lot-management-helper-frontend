@@ -85,3 +85,10 @@ export function isArray(arg) {
   }
   return Array.isArray(arg)
 }
+
+export function validPhoneNumber(str) {
+  if (!(/^1[3456789]\d{9}$/.test(str))) {
+    return false
+  }
+  return true
+}

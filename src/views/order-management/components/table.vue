@@ -65,7 +65,7 @@ export default {
     async patchOrder(order) {
       if (this.contentShow === '员工列表') {
         this.$store.dispatch('order/setOrderSelected', order)
-        await this.$store.dispatch('clerk/loadClerks')
+        await this.$store.dispatch('clerk/loadClerks', { name: '', role: 0 })
       } else if (this.contentShow === '员工电话') {
         const clerkId = order.clerkId
         const response = await this.$store.dispatch('clerk/loadClerkById', clerkId)
