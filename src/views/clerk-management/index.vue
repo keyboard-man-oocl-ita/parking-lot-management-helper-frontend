@@ -1,14 +1,18 @@
 <template>
-  <div />
+  <div>
+    <ClerkManagementHeader />
+    <ClerkManagementTable />
+    <clerk-management-footer />
+  </div>
 </template>
 
 <script>
-export default {
-  data() {
-    return {
+import ClerkManagementTable from './components/clerkTable'
+import ClerkManagementHeader from './components/header'
+import ClerkManagementFooter from './components/footer'
 
-    }
-  }
+export default {
+  components: { ClerkManagementTable, ClerkManagementHeader, ClerkManagementFooter }
 }
 </script>
 

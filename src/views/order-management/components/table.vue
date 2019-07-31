@@ -58,7 +58,7 @@ export default {
     },
     async patchOrder(order) {
       this.$store.dispatch('order/setOrderSelected', order)
-      await this.$store.dispatch('clerk/loadClerks')
+      await this.$store.dispatch('clerk/loadClerks', { name: '', role: 0 })
       this.dialogTableVisible = true
     },
     async updateOrder() {

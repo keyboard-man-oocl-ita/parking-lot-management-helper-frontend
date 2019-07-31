@@ -15,6 +15,7 @@ const getters = {
   total: state => state.order.total,
   currentPage: state => state.order.currentPage,
   orderSelected: state => state.order.orderSelected,
-  clerks: state => state.clerk.clerks
+  clerks: state => state.clerk.clerks,
+  clerksCurrentPage: state => state.clerk.currentPage
 }
 export default getters
