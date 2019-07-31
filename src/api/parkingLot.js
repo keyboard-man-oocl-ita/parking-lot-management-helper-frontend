@@ -6,3 +6,18 @@ export function loadParkingLots() {
     method: 'get'
   })
 }
+
+export function createParkingLot(data) {
+  return request({
+    url: '/parkingLots',
+    method: 'post',
+    data
+  })
+}
+
+export function loadConditionalParkingLots(parkingLotName, lowerLimit, upperLimit) {
+  return request({
+    url: `/parkingLots?parkingLotName=${parkingLotName}&lowerLimit=${lowerLimit}&upperLimit=${upperLimit}`,
+    method: 'get'
+  })
+}
