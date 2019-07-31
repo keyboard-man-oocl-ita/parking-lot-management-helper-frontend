@@ -37,3 +37,25 @@ export function fetchClerkById(id) {
     method: 'get'
   })
 }
+
+export function loadAllManager() {
+  return request({
+    url: '/clerks/managers',
+    method: 'get'
+  })
+}
+
+export function loadAllFreeClerk() {
+  return request({
+    url: '/clerks/unassignedParkingBoys',
+    method: 'get'
+  })
+}
+
+export function dispatchClerk(clerks) {
+  return request({
+    url: '/clerks',
+    method: 'patch',
+    data: clerks
+  })
+}

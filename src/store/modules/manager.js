@@ -1,3 +1,5 @@
+import { loadAllManager, loadAllFreeClerk, dispatchClerk } from '@/api/clerk'
+
 const state = {
   managers: [],
   totalOfManager: 0,
@@ -19,108 +21,8 @@ const mutations = {
 }
 
 const actions = {
-  loadManager({ commit }) {
-    const result = [
-      {
-        clerkId: '2c9a97f36c4250a8016c42b06ffc0004',
-        phoneNumber: '13212311231',
-        name: 'Liu',
-        email: '54321',
-        role: 'Parking Boy',
-        status: '已激活',
-        managedBy: ''
-      },
-      {
-        clerkId: '2c9a97f36c4250a8016c42b06ffc0021',
-        phoneNumber: '13212311231',
-        name: 'Liu',
-        email: '54321',
-        role: 'Parking Boy',
-        status: '已激活',
-        managedBy: ''
-      },
-      {
-        clerkId: '2c9a97f36c4250a8016c42b06ffc211',
-        phoneNumber: '13212311231',
-        name: 'Liu',
-        email: '54321',
-        role: 'Parking Boy',
-        status: '已激活',
-        managedBy: ''
-      },
-      {
-        clerkId: '2c9a97f36c4250a8016c42b06ff333',
-        phoneNumber: '13212311231',
-        name: 'Liu',
-        email: '54321',
-        role: 'Parking Boy',
-        status: '已激活',
-        managedBy: ''
-      },
-      {
-        clerkId: '2c9a97f36c4250a8016c42b06ff331',
-        phoneNumber: '13212311231',
-        name: 'Liu',
-        email: '54321',
-        role: 'Parking Boy',
-        status: '已激活',
-        managedBy: ''
-      },
-      {
-        clerkId: '2c9a97f36c4250a8016c42b06f22c0021',
-        phoneNumber: '13212311231',
-        name: 'Liu',
-        email: '54321',
-        role: 'Parking Boy',
-        status: '已激活',
-        managedBy: ''
-      },
-      {
-        clerkId: '2c9a97f36c4250a801633232c42b06ffc0021',
-        phoneNumber: '13212311231',
-        name: 'Liu',
-        email: '54321',
-        role: 'Parking Boy',
-        status: '已激活',
-        managedBy: ''
-      },
-      {
-        clerkId: '2c9a97f36c42501a80163332c42b06ffc0021',
-        phoneNumber: '13212311231',
-        name: 'Liu',
-        email: '54321',
-        role: 'Parking Boy',
-        status: '已激活',
-        managedBy: ''
-      },
-      {
-        clerkId: '2c9a97f363c4250a80163332c42b06ffc0021',
-        phoneNumber: '13212311231',
-        name: 'Liu',
-        email: '54321',
-        role: 'Parking Boy',
-        status: '已激活',
-        managedBy: ''
-      },
-      {
-        clerkId: '2c9a97f364c4250a80163332c42b06ffc0021',
-        phoneNumber: '13212311231',
-        name: 'Liu',
-        email: '54321',
-        role: 'Parking Boy',
-        status: '已激活',
-        managedBy: ''
-      },
-      {
-        clerkId: '2c95a97f36c4250a80163332c42b06ffc0021',
-        phoneNumber: '13212311231',
-        name: 'Liu',
-        email: '54321',
-        role: 'Parking Boy',
-        status: '已激活',
-        managedBy: ''
-      }
-    ]
+  async loadManager({ commit }) {
+    const result = await loadAllManager()
     commit('LOAD_MANAGER', result)
   },
   setCurrentPage({ commit }, index) {
@@ -130,61 +32,17 @@ const actions = {
     commit('SET_TOTAL', total)
   },
   async loadFreeClerks({ commit }) {
-    const result = [{
-      clerkId: '2c9a97f36c42150a8016c42b06ffc0004',
-      phoneNumber: '13212311231',
-      name: 'c',
-      email: '54321',
-      role: 'Parking Boy',
-      status: '已激活',
-      managedBy: ''
-    },
-    {
-      clerkId: '2c9a97f36c42502a8016c42b06ffc0021',
-      phoneNumber: '13212311231',
-      name: 'b',
-      email: '54321',
-      role: 'Parking Boy',
-      status: '已激活',
-      managedBy: ''
-    },
-    {
-      clerkId: '2c9a97f336c4250a8016c42b06ffc211',
-      phoneNumber: '13212311231',
-      name: 'a',
-      email: '54321',
-      role: 'Parking Boy',
-      status: '已激活',
-      managedBy: ''
-    }]
+    const result = await loadAllFreeClerk()
+    return result
+  },
+  async loadClerksOf({ coomit }, id) {
+    const result = []
     return new Promise((resolve, reject) => {
       resolve(result)
     })
   },
-  async loadClerksOf({ coomit }, id) {
-    const result = [
-      {
-        clerkId: '2c9a97f36c42150a8fc0004',
-        phoneNumber: '13212311231',
-        name: 'e',
-        email: '54321',
-        role: 'Parking Boy',
-        status: '已激活',
-        managedBy: ''
-      },
-      {
-        clerkId: '2c9a97f342b06ffc0021',
-        phoneNumber: '13212311231',
-        name: 'f',
-        email: '54321',
-        role: 'Parking Boy',
-        status: '已激活',
-        managedBy: ''
-      }
-    ]
-    return new Promise((resolve, reject) => {
-      resolve(result)
-    })
+  async batchUpdateClerk({ commit }, clerks) {
+    await dispatchClerk(clerks)
   }
 }
 

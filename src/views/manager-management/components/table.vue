@@ -16,12 +16,12 @@
     <el-dialog title="员工指派" :visible.sync="dialogVisible">
       <el-row>
         <el-col>
-          <el-transfer v-if="dialogVisible" v-model="freeClerks" :data="clerksOfManager" />
+          <el-transfer v-if="dialogVisible" v-model="clerksOfManagerDTO" :data="freeClerksDTO" />
         </el-col>
       </el-row>
       <el-row>
         <el-col>
-          <el-button @click="dialogVisible=false">确认</el-button>
+          <el-button @click="tranferClerk">确认</el-button>
           <el-button @click="dialogVisible=false">取消</el-button>
         </el-col>
       </el-row>
@@ -39,7 +39,10 @@ export default {
       dialogVisible: false,
       clerksOfManager: [],
       freeClerks: [],
-      managerSelect: ''
+      managerSelect: '',
+      managerId: '',
+      clerksOfManagerDTO: [],
+      freeClerksDTO: []
     }
   },
   computed: {
@@ -51,10 +54,11 @@ export default {
   },
   methods: {
     async handleDialogOpen(id) {
+      this.managerId = id
       this.freeClerks = await this.$store.dispatch('manager/loadFreeClerks')
       this.clerksOfManager = await this.$store.dispatch('manager/loadClerksOf', id)
-      this.freeClerks = this.transformIdToKey(this.freeClerks)
-      this.clerksOfManager = this.transformIdToKey(this.clerksOfManager)
+      this.freeClerksDTO = this.transformIdToKey(this.freeClerks)
+      this.clerksOfManagerDTO = this.transformIdToKey(this.clerksOfManager)
       this.dialogVisible = true
     },
     transformIdToKey(items) {
@@ -64,6 +68,41 @@ export default {
           label: item.name
         }
       })
+    },
+    async tranferClerk() {
+      const self = this
+      const clerkSelected = []
+      this.freeClerks.forEach(item => {
+        const isIn = self.clerksOfManagerDTO.findIndex(clerk => clerk === item.clerkId)
+        if (isIn !== -1) {
+          item.managedBy = self.managerId
+          clerkSelected.push(item)
+        }
+      })
+      clerkSelected.forEach(clerk => {
+        clerk.role = this.getRole(clerk.role)
+        clerk.status = this.getStatus(clerk.status)
+      })
+      await this.$store.dispatch('manager/batchUpdateClerk', clerkSelected)
+      this.dialogVisible = false
+    },
+    getRole(role) {
+      switch (role) {
+        case 'clerk':
+          return 1
+        case 'manager':
+          return 2
+        case 'admin':
+          return 3
+      }
+    },
+    getStatus(status) {
+      switch (status) {
+        case '已冻结':
+          return 0
+        case '已激活':
+          return 1
+      }
     }
   }
 }

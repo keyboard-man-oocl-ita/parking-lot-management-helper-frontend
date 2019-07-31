@@ -24,6 +24,9 @@ export default {
       phoneNumber: ''
     }
   },
+  mounted() {
+    this.loadAllManager()
+  },
   methods: {
     loadAllManager() {
       this.$store.dispatch('manager/loadManager')
