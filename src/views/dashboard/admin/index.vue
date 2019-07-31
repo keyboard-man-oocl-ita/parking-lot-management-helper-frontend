@@ -3,7 +3,7 @@
     <el-row :gutter="32">
       <el-col v-for="(item, index) in parkingLotsInDashboard" :key="index" :xs="24" :sm="12" :lg="8">
         <div class="chart-wrapper">
-          <pie-chart :statistic="item.data" :name="item.name" :clerk="item.clerk" />
+          <pie-chart :statistic="item" />
         </div>
       </el-col>
     </el-row>
@@ -24,6 +24,9 @@ export default {
   },
   computed: {
     ...mapGetters(['parkingLotsInDashboard'])
+  },
+  async mounted() {
+    await this.$store.dispatch('dashboard/loadParkingLot')
   }
 }
 </script>

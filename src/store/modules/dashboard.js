@@ -1,31 +1,8 @@
+import { loadParkingLotDashboard } from '@/api/parkingLot'
+
 const state = {
-  parkingLotsInDashboard: [
-    {
-      name: '停车场A',
-      clerk: 'jimmy',
-      data: [
-        { value: 10, name: '剩余' },
-        { value: 11, name: '已占用' }
-      ]
-    },
-    {
-      name: '停车场B',
-      clerk: 'gukson',
-      data: [
-        { value: 10, name: '剩余' },
-        { value: 12, name: '已占用' }
-      ]
-    },
-    {
-      name: '停车场C',
-      clerk: 'vincent',
-      data: [
-        { value: 10, name: '剩余' },
-        { value: 13, name: '已占用' }
-      ]
-    }
-  ],
-  totalOfParkingLotInDashboard: 3,
+  parkingLotsInDashboard: [],
+  totalOfParkingLotInDashboard: 0,
   currentPageOfParkingLotInDashboard: 1
 }
 
@@ -37,6 +14,9 @@ const mutations = {
 
 const actions = {
   async loadParkingLot({ commit }) {
+    const result = await loadParkingLotDashboard()
+    console.log(result)
+    commit('LOAD_PARKING_LOT', result)
   }
 }
 
