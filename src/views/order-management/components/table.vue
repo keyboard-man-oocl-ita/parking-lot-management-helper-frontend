@@ -68,7 +68,7 @@ export default {
         await this.$store.dispatch('clerk/loadClerks')
       } else if (this.contentShow === '员工电话') {
         const clerkId = order.clerkId
-        const response = await this.$store.dispatch('loadClerkById', clerkId)
+        const response = await this.$store.dispatch('clerk/loadClerkById', clerkId)
         this.clerkPhoneNumber = response.phoneNumber
       }
       this.dialogTableVisible = true
