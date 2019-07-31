@@ -1,4 +1,4 @@
-import { fetchClerk } from '@/api/clerk'
+import { fetchClerk, fetchClerkById } from '@/api/clerk'
 
 const state = {
   clerks: []
@@ -14,6 +14,10 @@ const actions = {
   async loadClerks({ commit }) {
     const result = await fetchClerk()
     commit('LOAD_CLERKS', result)
+  },
+  async loadClerkById({ commit }, id) {
+    const result = await fetchClerkById(id)
+    return result
   }
 }
 

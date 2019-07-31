@@ -6,3 +6,10 @@ export function fetchClerk() {
     method: 'get'
   })
 }
+
+export function fetchClerkById(id) {
+  return request({
+    url: `/clerks/${id}`,
+    method: 'get'
+  })
+}
