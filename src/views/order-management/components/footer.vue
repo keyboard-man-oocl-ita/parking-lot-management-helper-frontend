@@ -1,7 +1,7 @@
 <template>
   <el-row>
     <el-col :span="8" :offset="10">
-      <el-pagination :page-size="10" :total="total" layout="prev, pager, next" @current-change="updateCurrentPage" />
+      <el-pagination :page-size="10" :total="totalOfOrder" layout="prev, pager, next" @current-change="updateCurrentPage" />
     </el-col>
   </el-row>
 </template>
@@ -15,7 +15,7 @@ export default {
     return {}
   },
   computed: {
-    ...mapGetters(['total'])
+    ...mapGetters(['totalOfOrder'])
   },
   methods: {
     updateCurrentPage(curr) {

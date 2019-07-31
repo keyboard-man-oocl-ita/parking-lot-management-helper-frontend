@@ -43,12 +43,12 @@ export default {
     }
   },
   computed: {
-    ...mapGetters(['currentPage']),
+    ...mapGetters(['currentPageOfOrder']),
     ...mapGetters(['orders']),
     ...mapGetters(['clerks']),
     ...mapGetters(['orderSelected']),
     orderShow() {
-      return this.orders.slice(Math.max(0, this.currentPage - 1) * 10, this.currentPage * 10)
+      return this.orders.slice(Math.max(0, this.currentPageOfOrder - 1) * 10, this.currentPageOfOrder * 10)
     }
   },
   methods: {
