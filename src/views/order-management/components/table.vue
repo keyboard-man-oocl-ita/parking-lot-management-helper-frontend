@@ -34,14 +34,14 @@ export default {
   data() {
     return {
       dialogTableVisible: false,
-      clerkSelectd: '',
-      orderSelected: {}
+      clerkSelectd: ''
     }
   },
   computed: {
     ...mapGetters(['currentPage']),
     ...mapGetters(['orders']),
     ...mapGetters(['clerks']),
+    ...mapGetters(['orderSelected']),
     orderShow() {
       return this.orders.slice(Math.max(0, this.currentPage - 1) * 10, this.currentPage * 10)
     }
@@ -57,14 +57,15 @@ export default {
       return false
     },
     async patchOrder(order) {
-      this.orderSelected = order
+      this.$store.dispatch('order/setOrderSelected', order)
       await this.$store.dispatch('clerk/loadClerks')
       this.dialogTableVisible = true
     },
     async updateOrder() {
-      this.orderSelected.clerkId = this.clerkSelectd
-      this.orderSelected.status = 1
-      this.$store.dispatch('order/updateOrder', this.orderSelected)
+      const order = Object.assign({}, this.orderSelected)
+      order.clerkId = this.clerkSelectd
+      order.status = 1
+      this.$store.dispatch('order/updateOrder', order)
       this.dialogTableVisible = false
     }
   }
