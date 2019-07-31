@@ -23,16 +23,8 @@ export default {
       default: '300px'
     },
     statistic: {
-      type: Array,
-      default: () => []
-    },
-    name: {
-      type: String,
-      default: ''
-    },
-    clerk: {
-      type: String,
-      default: ''
+      type: Object,
+      default: () => {}
     }
   },
   data() {
@@ -58,8 +50,8 @@ export default {
 
       this.chart.setOption({
         title: {
-          text: this.name,
-          subtext: `由${this.clerk}管理`
+          text: this.statistic.name,
+          subtext: `由${this.statistic.nameOfmanagedBy || this.statistic.managedBy}管理`
         },
         tooltip: {
           trigger: 'item',
@@ -77,7 +69,10 @@ export default {
             roseType: 'radius',
             radius: [15, 95],
             center: ['50%', '38%'],
-            data: this.statistic,
+            data: [
+              { value: this.statistic.residualPosition, name: '剩余' },
+              { value: this.statistic.capacity - this.statistic.residualPosition, name: '已占用' }
+            ],
             animationEasing: 'cubicInOut',
             animationDuration: 2600
           }

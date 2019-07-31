@@ -16,6 +16,14 @@ export function addNewClerk(data) {
   })
 }
 
+export function modifyPermission(data) {
+  return request({
+    url: `/admin/clerks/${data.clerkId}`,
+    method: 'patch',
+    data: data.clerk
+  })
+}
+
 export function patchClerkStatus(id) {
   return request({
     url: `/clerks/${id}`,

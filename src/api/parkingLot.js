@@ -21,3 +21,10 @@ export function loadConditionalParkingLots(parkingLotName, lowerLimit, upperLimi
     method: 'get'
   })
 }
+
+export function loadParkingLotDashboard() {
+  return request({
+    url: '/parkingLotDashboard',
+    method: 'get'
+  })
+}

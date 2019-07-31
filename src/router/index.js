@@ -153,6 +153,19 @@ export const asyncRoutes = [
     ]
   },
 
+  {
+    path: '/manager-management',
+    component: Layout,
+    children: [
+      {
+        path: 'index',
+        component: () => import('@/views/manager-management/index'),
+        name: 'manager-management',
+        meta: { title: '停车经理管理', icon: 'peoples', noCache: true }
+      }
+    ]
+  },
+
   /** when your routing map is too long, you can split it into small modules **/
   // componentsRouter,
 

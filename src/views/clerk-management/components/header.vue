@@ -29,9 +29,9 @@
         </el-form-item>
         <el-form-item label="角色" prop="role" :label-width="formLabelWidth">
           <el-select v-model="clerkForm.role">
-            <el-option label="普通停车员" value="1" />
-            <el-option label="经理" value="2" />
-            <el-option label="管理员" value="3" />
+            <el-option label="clerk" value="1" />
+            <el-option label="manager" value="2" />
+            <el-option label="admin" value="3" />
           </el-select>
         </el-form-item>
         <el-form-item label="电话号码" prop="phoneNumber" :label-width="formLabelWidth">
