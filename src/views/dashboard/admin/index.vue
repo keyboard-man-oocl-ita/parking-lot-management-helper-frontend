@@ -1,7 +1,7 @@
 <template>
   <div class="dashboard-editor-container">
     <el-row :gutter="32">
-      <el-col v-for="(item, index) in parkingLotList" :key="index" :xs="24" :sm="12" :lg="8">
+      <el-col v-for="(item, index) in parkingLotsInDashboard" :key="index" :xs="24" :sm="12" :lg="8">
         <div class="chart-wrapper">
           <pie-chart :statistic="item.data" :name="item.name" :clerk="item.clerk" />
         </div>
@@ -12,6 +12,7 @@
 
 <script>
 import PieChart from './components/PieChart'
+import { mapGetters } from 'vuex'
 
 export default {
   name: 'DashboardAdmin',
@@ -19,34 +20,10 @@ export default {
     PieChart
   },
   data() {
-    return {
-      parkingLotList: [
-        {
-          name: '停车场A',
-          clerk: 'jimmy',
-          data: [
-            { value: 10, name: '剩余' },
-            { value: 11, name: '已占用' }
-          ]
-        },
-        {
-          name: '停车场B',
-          clerk: 'gukson',
-          data: [
-            { value: 10, name: '剩余' },
-            { value: 12, name: '已占用' }
-          ]
-        },
-        {
-          name: '停车场C',
-          clerk: 'vincent',
-          data: [
-            { value: 10, name: '剩余' },
-            { value: 13, name: '已占用' }
-          ]
-        }
-      ]
-    }
+    return {}
+  },
+  computed: {
+    ...mapGetters(['parkingLotsInDashboard'])
   }
 }
 </script>
