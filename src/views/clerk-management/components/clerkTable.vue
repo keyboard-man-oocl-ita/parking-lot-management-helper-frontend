@@ -2,10 +2,10 @@
   <div>
     <el-table
       :data="clerkShow"
-      style="width: 100%"
+      style="width: 95%;margin: auto"
       border
     >
-      <el-table-column label="id" width="180" prop="clerkId" />
+      <el-table-column label="id" width="335" prop="clerkId" />
       <el-table-column prop="name" label="姓名" width="180" />
       <el-table-column prop="email" label="email" width="180" />
       <el-table-column prop="phoneNumber" label="电话号码" width="180" />
@@ -13,8 +13,8 @@
       <el-table-column label="操作">
         <template slot-scope="scope">
           <el-button size="mini" @click="handleEdit(scope.$index, scope.row)">修改</el-button>
-          <el-button v-if="scope.row.status=='已激活'" size="mini" type="danger" @click="handleFreeze(scope.$index, scope.row)">冻结</el-button>
-          <el-button v-else size="mini" type="danger" @click="handleFreeze(scope.$index, scope.row)">解冻</el-button>
+          <el-button v-if="scope.row.status=='已激活'" size="mini" type="danger" :disabled="isCurrUser(scope.row)" @click="handleFreeze(scope.$index, scope.row)">冻结</el-button>
+          <el-button v-else size="mini" type="success" @click="handleFreeze(scope.$index, scope.row)">解冻</el-button>
         </template>
       </el-table-column>
     </el-table>
@@ -49,6 +49,12 @@ export default {
     },
     async handleFreeze(index, row) {
       this.$store.dispatch('clerk/updateClerkStatus', row.clerkId)
+    },
+    isCurrUser(row) {
+      if (row.role === 'admin') {
+        return true
+      }
+      return false
     }
   }
 }

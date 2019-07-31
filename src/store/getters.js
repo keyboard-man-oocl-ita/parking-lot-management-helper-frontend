@@ -17,6 +17,7 @@ const getters = {
   orderSelected: state => state.order.orderSelected,
   clerks: state => state.clerk.clerks,
   clerksCurrentPage: state => state.clerk.currentPage,
+  totalOfClerk: state => state.clerk.totalOfClerk,
   parkingLotsInDashboard: state => state.dashboard.parkingLotsInDashboard,
   totalOfParkingLotInDashboard: state => state.dashboard.totalOfParkingLotInDashboard,
   currentPageOfParkingLotInDashboard: state => state.dashboard.currentPageOfParkingLotInDashboard

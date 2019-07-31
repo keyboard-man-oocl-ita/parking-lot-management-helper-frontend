@@ -83,7 +83,7 @@ export default {
       },
       clerkFormRules: {
         phoneNumber: [
-          { required: true, trigger: 'blur', validator: validateUserName }
+          { trigger: 'blur', validator: validateUserName }
         ],
         email: [
           { trigger: 'blur', validator: validateEmail }

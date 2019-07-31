@@ -3,21 +3,21 @@ import { addNewClerk, patchClerkStatus } from '../../api/clerk'
 
 const state = {
   clerks: [],
-  total: 0,
+  totalOfClerk: 0,
   currentPage: -1
 }
 
 const mutations = {
   LOAD_CLERKS: (state, clerks) => {
     state.clerks = clerks
-    state.total = clerks.length
+    state.totalOfClerk = clerks.length
     state.currentPage = 1
   },
   SET_CURRENT_PAGE: (state, index) => {
     state.currentPage = index
   },
   SET_TOTAL: (state, total) => {
-    state.total = total
+    state.totalOfClerk = total
   }
 }
 
