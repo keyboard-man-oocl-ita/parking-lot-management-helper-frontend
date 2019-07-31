@@ -13,17 +13,17 @@
       </el-table>
     </el-col>
     <el-dialog title="订单指派" :visible.sync="dialogTableVisible">
-      <el-row :v-show="contentShow === '员工列表'">
+      <el-row v-show="contentShow === '员工列表'">
         <el-select v-model="clerkSelectd">
           <el-option v-for="item in clerks" :key="item.clerkId" :label="item.name" :value="item.clerkId" />
         </el-select>
       </el-row>
-      <el-row>
+      <el-row v-show="contentShow === '员工列表'">
         <el-button @click="updateOrder">确定</el-button>
         <el-button @click="dialogTableVisible = false">取消</el-button>
       </el-row>
-      <el-row :v-show="contentShow === '员工电话'">
-        <span>{{ clerkPhoneNumber }}</span>
+      <el-row v-show="contentShow === '员工电话'">
+        <span>员工电话 {{ clerkPhoneNumber }}</span>
       </el-row>
     </el-dialog>
   </el-row>
@@ -68,7 +68,7 @@ export default {
         await this.$store.dispatch('clerk/loadClerks')
       } else if (this.contentShow === '员工电话') {
         const clerkId = order.clerkId
-        const response = await this.$store.dispatch('loadClerkById', clerkId)
+        const response = await this.$store.dispatch('clerk/loadClerkById', clerkId)
         this.clerkPhoneNumber = response.phoneNumber
       }
       this.dialogTableVisible = true
