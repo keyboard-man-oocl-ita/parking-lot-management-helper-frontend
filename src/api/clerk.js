@@ -22,3 +22,10 @@ export function patchClerkStatus(id) {
     method: 'patch'
   })
 }
+
+export function fetchClerkById(id) {
+  return request({
+    url: `/clerks/${id}`,
+    method: 'get'
+  })
+}

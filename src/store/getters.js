@@ -12,10 +12,13 @@ const getters = {
   permission_routes: state => state.permission.routes,
   errorLogs: state => state.errorLog.logs,
   orders: state => state.order.orders,
-  total: state => state.order.total,
-  currentPage: state => state.order.currentPage,
+  totalOfOrder: state => state.order.totalOfOrder,
+  currentPageOfOrder: state => state.order.currentPageOfOrder,
   orderSelected: state => state.order.orderSelected,
   clerks: state => state.clerk.clerks,
-  clerksCurrentPage: state => state.clerk.currentPage
+  clerksCurrentPage: state => state.clerk.currentPage,
+  parkingLotsInDashboard: state => state.dashboard.parkingLotsInDashboard,
+  totalOfParkingLotInDashboard: state => state.dashboard.totalOfParkingLotInDashboard,
+  currentPageOfParkingLotInDashboard: state => state.dashboard.currentPageOfParkingLotInDashboard
 }
 export default getters

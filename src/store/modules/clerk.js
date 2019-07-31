@@ -1,4 +1,4 @@
-import { fetchClerk } from '@/api/clerk'
+import { fetchClerk, fetchClerkById } from '@/api/clerk'
 import { addNewClerk, patchClerkStatus } from '../../api/clerk'
 
 const state = {
@@ -28,6 +28,10 @@ const actions = {
   },
   setCurrentPage({ commit }, index) {
     commit('SET_CURRENT_PAGE', index)
+  },
+  async loadClerkById({ commit }, id) {
+    const result = await fetchClerkById(id)
+    return result
   },
   setTotal({ commit }, total) {
     commit('SET_TOTAL', total)
