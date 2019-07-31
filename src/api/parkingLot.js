@@ -2,7 +2,7 @@ import request from '@/utils/request'
 
 export function loadParkingLots() {
   return request({
-    url: '/parkingLots',
+    url: '/admin/parkingLots',
     method: 'get'
   })
 }

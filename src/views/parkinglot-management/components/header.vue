@@ -6,10 +6,13 @@
           <el-button type="primary" icon="el-icon-search" @click="dialogFormVisible = true">新建</el-button>
         </el-col>
       </el-col>
-      <el-col :span="4" :offset="0">
+      <el-col>
+        <el-button type="primary" @click="refresh">刷新</el-button>
+      </el-col>
+      <el-col :span="5" :offset="0">
         <el-input v-model="lowerLimit" placeholder="下限" />
       </el-col>
-      <el-col :span="4" :offset="1">
+      <el-col :span="5" :offset="1">
         <el-input v-model="upperLimit" placeholder="上限" />
       </el-col>
       <el-col :span="10" :offset="1">
@@ -41,7 +44,8 @@
 </template>
 
 <script>
-import { createParkingLot, loadConditionalParkingLots } from '@/api/parkingLot'
+import { createParkingLot } from '../../../api/parkingLot'
+import { loadConditionalParkingLots } from '../../../api/parkingLot'
 
 export default {
   name: 'ParkingLotManagementHeader',
@@ -58,24 +62,36 @@ export default {
       }
     }
   },
-  async mounted() {
-    await this.$store.dispatch('loadParkingLots')
+  mounted() {
   },
   methods: {
-    async createParkingLotImpl() {
-      this.dialogFormVisible = false
-      await createParkingLot(this.newParkingLot)
-      this.$message({
-        message: '新建停车场成功',
-        type: 'success'
+    loadConditionalParkingLotsImpl() {
+      loadConditionalParkingLots(this.parkingLotName, this.lowerLimit, this.upperLimit).then((res) => {
+        this.$store.commit('parkingLot/LOAD_PARKING_LOT', res)
+        this.$message({
+          message: '搜索成功',
+          type: 'success'
+        })
+      }).catch((error) => {
+        console.log(error)
+        this.$message.error('搜索失败')
       })
-      await this.$store.dispatch('loadParkingLots')
     },
-    async loadConditionalParkingLotsImpl() {
-      await loadConditionalParkingLots(this.parkingLotName, this.lowerLimit, this.upperLimit)
-      this.$message({
-        message: '搜索停车场成功',
-        type: 'success'
+    createParkingLotImpl() {
+      createParkingLot(this.newParkingLot).then(() => {
+        this.$message({
+          message: '创建成功',
+          type: 'success'
+        })
+      }).catch(error => console.log(error))
+      this.dialogFormVisible = false
+    },
+    refresh() {
+      this.$store.dispatch('parkingLot/loadParkingLotAct').then(() => {
+        this.$message({
+          message: '刷新成功',
+          type: 'success'
+        })
       })
     }
   }

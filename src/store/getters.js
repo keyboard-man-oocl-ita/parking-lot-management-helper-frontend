@@ -20,6 +20,7 @@ const getters = {
   totalOfClerk: state => state.clerk.totalOfClerk,
   parkingLotsInDashboard: state => state.dashboard.parkingLotsInDashboard,
   totalOfParkingLotInDashboard: state => state.dashboard.totalOfParkingLotInDashboard,
-  currentPageOfParkingLotInDashboard: state => state.dashboard.currentPageOfParkingLotInDashboard
+  currentPageOfParkingLotInDashboard: state => state.dashboard.currentPageOfParkingLotInDashboard,
+  parkingLots: state => state.parkingLot.parkingLots
 }
 export default getters
