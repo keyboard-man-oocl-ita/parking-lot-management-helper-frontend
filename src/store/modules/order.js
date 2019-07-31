@@ -14,7 +14,7 @@ const mutations = {
     state.currentPageOfOrder = 1
   },
   SET_CURRENT_PAGE: (state, index) => {
-    state.currentPage = index
+    state.currentPageOfOrder = index
   },
   SET_TOTAL: (state, total) => {
     state.totalOfOrder = total
