@@ -1,13 +1,13 @@
 import request from '@/utils/request'
 
-export function loadParkingLots() {
+export async function loadParkingLots() {
   return request({
     url: '/admin/parkingLots',
     method: 'get'
   })
 }
 
-export function loadParkingLotsWithoutManager() {
+export async function loadParkingLotsWithoutManager() {
   return request({
     url: '/parkingLots',
     method: 'get'

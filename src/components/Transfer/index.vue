@@ -19,12 +19,13 @@ export default {
   data() {
     return {
       value: [],
-      transferData: []
+      transferData: [],
+      newArr: []
     }
   },
   created() {
+    // this.getAllParkingLot()
     this.loadParkingLotsWithout()
-    this.getAllParkingLot()
   },
   methods: {
     generateData(parkingLot) {
@@ -55,23 +56,20 @@ export default {
         })
       }
     },
-    getAllParkingLot() {
-      loadParkingLots().then((res) => {
-        res.forEach((item) => {
-          if (item.managedBy === this.clerk) {
-            this.value.push(item.parkingLotId)
-            // this.$set(this.value, this.value.length, item.parkingLotId)
-          }
-        })
-        console.log(this.value)
-        this.transferData = this.transferData.concat(this.value) // 这里塞进去
-        console.log(this.transferData)
+    async getAllParkingLot() {
+      const res = await loadParkingLots()
+      res.forEach((item) => {
+        if (item.managedBy === this.clerk) {
+          this.newArr.push(item)
+          this.value.push(item.parkingLotId)
+        }
       })
     },
-    loadParkingLotsWithout() {
-      loadParkingLotsWithoutManager().then(res => {
-        this.transferData = this.generateData(res)
-      })
+    async loadParkingLotsWithout() {
+      this.getAllParkingLot()
+      const res = await loadParkingLotsWithoutManager()
+      const newarr = res.concat(this.newArr)
+      this.transferData = this.generateData(newarr)
     }
   }
 }

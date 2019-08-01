@@ -19,14 +19,6 @@
       <el-table :data="tableData" style="width: 100%">
         <el-table-column type="expand">
           <template slot-scope="scope">
-            <!-- <el-transfer
-              v-model="value"
-              filterable
-              :titles="['可选停车场', '管理的停车场']"
-              filter-placeholder="请输入搜索内容"
-              :data="scope.row.transferData"
-              @change="handleChange(...arguments, scope.row.clerkId)"
-            /> -->
             <Transfer :clerk="scope.row.clerkId" />
           </template>
         </el-table-column>
@@ -74,7 +66,6 @@ export default {
   },
   created() {
     this.getList()
-    // this.getParkinglots()
   },
   methods: {
     getList() {
@@ -83,14 +74,6 @@ export default {
         this.total = res.length
       })
     },
-    // getParkinglots() {
-    //   loadParkingLotsWithoutManager().then(res => {
-    //     // this.tableData.forEach(item => {
-    //     //   item.transferData = this.generateData(res)
-    //     // })
-    //     this.parkinglotData = res
-    //   })
-    // },
     handleFilter() {
       findClerkByCondition({ userName: this.userName, phoneNumber: this.phoneNumber }).then((res) => {
         if (Array.isArray(res)) {
@@ -100,9 +83,6 @@ export default {
           arr.push(res)
           this.tableData = arr
         }
-        // this.tableData.forEach(item => {
-        //   item.transferData = this.generateData(res)
-        // })
       })
     },
     generateData(parkingLot) {
