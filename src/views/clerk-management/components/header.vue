@@ -99,6 +99,7 @@ export default {
           this.dialogFormVisible = false
           const clerk = Object.assign({}, this.clerkForm)
           this.$store.dispatch('adminClerks/addNewClerk', clerk)
+          this.resetClerkForm()
         } else {
           return false
         }
