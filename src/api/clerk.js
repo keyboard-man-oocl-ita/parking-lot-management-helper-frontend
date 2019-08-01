@@ -1,10 +1,9 @@
 import request from '@/utils/request'
 
-export function fetchClerk(params) {
+export function fetchClerk() {
   return request({
-    url: '/clerks/managers',
-    method: 'get',
-    params: params
+    url: '/managers',
+    method: 'get'
   })
 }
 
@@ -97,4 +96,12 @@ export function findClerkByCondition(data) {
       method: 'get'
     })
   }
+}
+
+export function findClerkByManagerId(params) {
+  return request({
+    url: `/clerks`,
+    method: 'get',
+    params: params
+  })
 }

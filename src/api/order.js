@@ -10,7 +10,7 @@ export function fetchOrder(params) {
 
 export function patchOrder(data) {
   return request({
-    url: '/orders',
+    url: '/appointedOrders',
     method: 'put',
     data: data
   })
