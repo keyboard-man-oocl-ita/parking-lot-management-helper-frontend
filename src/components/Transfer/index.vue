@@ -24,21 +24,17 @@ export default {
     }
   },
   created() {
-    // this.getAllParkingLot()
     this.loadParkingLotsWithout()
   },
   methods: {
     generateData(parkingLot) {
       const data = []
       const parkinglots = parkingLot
-      // const pinyin = ['1', '2', '3', '4', '5', '6', '7', '8', '9', '0']
       parkinglots.forEach((parkinglot, index) => {
         const str = parkinglot.name
-        // const lastIndex = str.substr(str.length - 1, 1)
         data.push({
           label: str,
           key: parkinglot.parkingLotId
-          // pinyin: pinyin[lastIndex - 1]
         })
       })
       return data
