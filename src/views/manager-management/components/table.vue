@@ -72,19 +72,32 @@ export default {
     },
     async tranferClerk() {
       const self = this
-      const clerkSelected = []
+      const clerkPatched = []
       this.freeClerks.forEach(item => {
         const isIn = self.clerksOfManagerDTO.findIndex(clerk => clerk === item.clerkId)
         if (isIn !== -1) {
           item.managedBy = self.managerId
-          clerkSelected.push(item)
+          clerkPatched.push(item)
         }
       })
-      clerkSelected.forEach(clerk => {
+      clerkPatched.forEach(clerk => {
         clerk.role = this.getRole(clerk.role)
         clerk.status = this.getStatus(clerk.status)
       })
-      await this.$store.dispatch('manager/batchUpdateClerk', clerkSelected)
+      const clerkFree = []
+      this.clerksOfManager.forEach(item => {
+        const isIn = self.clerksOfManagerDTO.findIndex(clerk => clerk === item.clerkId)
+        if (isIn !== -1) {
+          item.managedBy = null
+          clerkFree.push(item)
+        }
+      })
+      clerkFree.forEach(clerk => {
+        clerk.role = this.getRole(clerk.role)
+        clerk.status = this.getStatus(clerk.status)
+      })
+      await this.$store.dispatch('manager/batchUpdateClerk', clerkPatched)
+      await this.$store.dispatch('manager/batchUpdateClerk', clerkFree)
       this.dialogVisible = false
     },
     getRole(role) {

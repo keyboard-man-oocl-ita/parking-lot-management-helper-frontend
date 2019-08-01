@@ -97,3 +97,11 @@ export function findClerkByCondition(data) {
     })
   }
 }
+
+export function findClerkByManagerId(params) {
+  return request({
+    url: `/clerks`,
+    method: 'get',
+    params: params
+  })
+}

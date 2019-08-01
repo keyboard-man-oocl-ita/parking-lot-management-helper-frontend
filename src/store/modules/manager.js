@@ -1,4 +1,4 @@
-import { loadAllManager, loadAllFreeClerk, dispatchClerk } from '@/api/clerk'
+import { loadAllManager, loadAllFreeClerk, dispatchClerk, findClerkByManagerId } from '@/api/clerk'
 
 const state = {
   managers: [],
@@ -36,10 +36,10 @@ const actions = {
     return result
   },
   async loadClerksOf({ coomit }, id) {
-    const result = []
-    return new Promise((resolve, reject) => {
-      resolve(result)
+    const result = await findClerkByManagerId({
+      managedBy: id
     })
+    return result
   },
   async batchUpdateClerk({ commit }, clerks) {
     await dispatchClerk(clerks)
