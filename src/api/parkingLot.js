@@ -28,3 +28,18 @@ export function loadParkingLotDashboard() {
     method: 'get'
   })
 }
+
+export function logoutOrActivateParkingLot(parkingLot) {
+  return request({
+    url: `/parkingLots/${parkingLot.parkingLotId}/logout`,
+    method: 'patch'
+  })
+}
+
+export function alterParkingLot(parkingLotId, data) {
+  return request({
+    url: `/parkingLots?parkingLotId=${parkingLotId}`,
+    method: 'patch',
+    data
+  })
+}

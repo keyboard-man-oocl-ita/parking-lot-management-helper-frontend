@@ -2,6 +2,7 @@ import { loadParkingLots } from '../../api/parkingLot'
 
 const state = {
   parkingLots: [],
+  searching: false,
   totalOfParkingLot: 0,
   currentPageOfParkingLot: 1
 }
@@ -11,6 +12,12 @@ const mutations = {
     state.parkingLots = parkingLots
     state.totalOfParkingLot = parkingLots.length
     state.currentPageOfParkingLot = 1
+  },
+  SET_SEARCHING_TRUE: (state) => {
+    state.searching = true
+  },
+  SET_SEARCHING_FALSE: (state) => {
+    state.searching = false
   }
 }
 

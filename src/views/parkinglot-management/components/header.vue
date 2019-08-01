@@ -9,13 +9,13 @@
       <el-col>
         <el-button type="primary" @click="refresh">刷新</el-button>
       </el-col>
-      <el-col :span="5" :offset="0">
+      <el-col :span="8" :offset="0">
         <el-input v-model="lowerLimit" placeholder="下限" />
       </el-col>
-      <el-col :span="5" :offset="1">
+      <el-col :span="8" :offset="1">
         <el-input v-model="upperLimit" placeholder="上限" />
       </el-col>
-      <el-col :span="10" :offset="1">
+      <el-col :span="18" :offset="1">
         <el-input v-model="parkingLotName" placeholder="停车场名字" />
       </el-col>
       <el-col :span="2">
@@ -46,6 +46,7 @@
 <script>
 import { createParkingLot } from '../../../api/parkingLot'
 import { loadConditionalParkingLots } from '../../../api/parkingLot'
+import { mapGetters } from 'vuex'
 
 export default {
   name: 'ParkingLotManagementHeader',
@@ -62,7 +63,8 @@ export default {
       }
     }
   },
-  mounted() {
+  computed: {
+    ...mapGetters(['searching'])
   },
   methods: {
     loadConditionalParkingLotsImpl() {
@@ -70,6 +72,8 @@ export default {
       const finalUpperLimit = this.upperLimit === '' ? -1 : this.upperLimit
       loadConditionalParkingLots(this.parkingLotName, finalLowerLimit, finalUpperLimit).then((res) => {
         this.$store.commit('parkingLot/LOAD_PARKING_LOT', res)
+        this.$store.commit('parkingLot/SET_SEARCHING_TRUE')
+        console.log(`searching status = ${this.searching}`)
         this.$message({
           message: '搜索成功',
           type: 'success'
@@ -90,6 +94,8 @@ export default {
     },
     refresh() {
       this.$store.dispatch('parkingLot/loadParkingLotAct').then(() => {
+        this.$store.commit('parkingLot/SET_SEARCHING_FALSE')
+        console.log(`searching status = ${this.searching}`)
         this.lowerLimit = ''
         this.upperLimit = ''
         this.parkingLotName = ''
