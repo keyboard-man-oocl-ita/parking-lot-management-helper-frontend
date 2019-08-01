@@ -18,6 +18,17 @@ export default {
   },
   data() {
     return {}
+  },
+  mounted() {
+    this.loadOrder()
+  },
+  methods: {
+    async loadOrder() {
+      await this.$store.dispatch('order/loadOrders', {
+        carLicense: '',
+        status: -1
+      })
+    }
   }
 }
 </script>
