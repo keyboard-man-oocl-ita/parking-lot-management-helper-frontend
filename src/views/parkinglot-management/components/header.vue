@@ -22,7 +22,7 @@
         <el-button type="primary" icon="el-icon-search" @click="loadConditionalParkingLotsImpl">搜索</el-button>
       </el-col>
 
-      <el-dialog title="新建停车场" :visible.sync="dialogFormVisible">
+      <el-dialog title="新建停车场" :visible.sync="dialogFormVisible" :before-close="clearDialogContent">
         <el-form>
           <el-form-item label="停车场名字">
             <el-input v-model="newParkingLot.name" autocomplete="off" />
@@ -35,7 +35,7 @@
           </el-form-item>
         </el-form>
         <div slot="footer" class="dialog-footer">
-          <el-button @click="dialogFormVisible = false">取 消</el-button>
+          <el-button @click="clearDialogContent">取 消</el-button>
           <el-button type="primary" @click="createParkingLotImpl">确 定</el-button>
         </div>
       </el-dialog>
@@ -85,12 +85,12 @@ export default {
     },
     createParkingLotImpl() {
       createParkingLot(this.newParkingLot).then(() => {
+        this.clearDialogContent()
         this.$message({
           message: '创建成功',
           type: 'success'
         })
       }).catch(error => console.log(error))
-      this.dialogFormVisible = false
     },
     refresh() {
       this.$store.dispatch('parkingLot/loadParkingLotAct').then(() => {
@@ -104,6 +104,12 @@ export default {
           type: 'success'
         })
       })
+    },
+    clearDialogContent() {
+      this.newParkingLot.name = ''
+      this.newParkingLot.capacity = ''
+      this.newParkingLot.description = ''
+      this.dialogFormVisible = false
     }
   }
 }

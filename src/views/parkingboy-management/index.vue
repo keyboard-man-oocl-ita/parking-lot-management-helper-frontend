@@ -19,14 +19,7 @@
       <el-table :data="tableData" style="width: 100%">
         <el-table-column type="expand">
           <template slot-scope="scope">
-            <el-transfer
-              v-model="value"
-              filterable
-              :titles="['可选停车场', '管理的停车场']"
-              filter-placeholder="请输入搜索内容"
-              :data="scope.row.transferData"
-              @change="handleChange(...arguments, scope.row.clerkId)"
-            />
+            <Transfer :clerk="scope.row.clerkId" />
           </template>
         </el-table-column>
         <el-table-column label="id" prop="clerkId" />
@@ -48,12 +41,13 @@
 
 <script>
 import { findClerkByManagedBy, findClerkByCondition } from '@/api/clerk'
-import { loadParkingLotsWithoutManager, updateParkingLotManagedBy, loadParkingLotDashboard } from '@/api/parkingLot'
 import Pagination from '@/components/Pagination'
+import Transfer from '@/components/Transfer'
 
 export default {
   components: {
-    Pagination
+    Pagination,
+    Transfer
   },
   data() {
     return {
@@ -63,37 +57,21 @@ export default {
       listQuery: {
         page: 1,
         limit: 10,
-        importance: undefined,
-        title: undefined,
-        type: undefined
+        importance: undefined
       },
-      value: [],
-      // filterMethod(query, item) {
-      //   return item.pinyin.indexOf(query) > -1
-      // },
+      parkinglotValue: [],
       tableData: [],
       parkinglotData: []
     }
   },
   created() {
     this.getList()
-    this.getParkinglots()
-    this.getAllParkingLot()
   },
   methods: {
     getList() {
       findClerkByManagedBy().then(res => {
         this.tableData = res
         this.total = res.length
-      })
-    },
-    getParkinglots() {
-      loadParkingLotsWithoutManager().then(res => {
-        this.tableData.forEach(item => {
-          item.transferData = this.generateData(res)
-        })
-        this.parkinglotData = res
-        // console.log(this.tableData)
       })
     },
     handleFilter() {
@@ -105,9 +83,6 @@ export default {
           arr.push(res)
           this.tableData = arr
         }
-        this.tableData.forEach(item => {
-          item.transferData = this.generateData(res)
-        })
       })
     },
     generateData(parkingLot) {
@@ -124,30 +99,6 @@ export default {
         })
       })
       return data
-    },
-    handleChange(value, direction, movedKeys, id) {
-      if (direction === 'right') {
-        const data = { 'managedBy': id }
-        movedKeys.forEach((item) => {
-          updateParkingLotManagedBy(item, data)
-        })
-      } else {
-        const data = { 'managedBy': null }
-        movedKeys.forEach((item) => {
-          updateParkingLotManagedBy(item, data)
-        })
-      }
-    },
-    getAllParkingLot() {
-      loadParkingLotDashboard().then((res) => {
-        // console.log(res)
-        res.forEach((item) => {
-          if (item.managedBy != null) {
-            this.value.push(item.parkingLotId)
-            console.log(this.value)
-          }
-        })
-      })
     }
   }
 }
