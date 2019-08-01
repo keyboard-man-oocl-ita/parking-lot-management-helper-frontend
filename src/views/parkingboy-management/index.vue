@@ -22,7 +22,6 @@
             <el-transfer
               v-model="value"
               filterable
-              :filter-method="filterMethod"
               :titles="['可选停车场', '管理的停车场']"
               filter-placeholder="请输入搜索内容"
               :data="scope.row.transferData"
@@ -69,9 +68,9 @@ export default {
         type: undefined
       },
       value: [],
-      filterMethod(query, item) {
-        return item.pinyin.indexOf(query) > -1
-      },
+      // filterMethod(query, item) {
+      //   return item.pinyin.indexOf(query) > -1
+      // },
       tableData: [],
       parkinglotData: []
     }
@@ -114,14 +113,14 @@ export default {
     generateData(parkingLot) {
       const data = []
       const parkinglots = parkingLot
-      const pinyin = ['1', '2', '3', '4', '5', '6', '7', '8', '9', '0']
+      // const pinyin = ['1', '2', '3', '4', '5', '6', '7', '8', '9', '0']
       parkinglots.forEach((parkinglot, index) => {
         const str = parkinglot.name
-        const lastIndex = str.substr(str.length - 1, 1)
+        // const lastIndex = str.substr(str.length - 1, 1)
         data.push({
           label: str,
-          key: parkinglot.parkingLotId,
-          pinyin: pinyin[lastIndex - 1]
+          key: parkinglot.parkingLotId
+          // pinyin: pinyin[lastIndex - 1]
         })
       })
       return data
