@@ -28,3 +28,18 @@ export function loadParkingLotDashboard() {
     method: 'get'
   })
 }
+
+export function updateParkingLotManagedBy(id, data) {
+  return request({
+    url: `/parkingLots/${id}`,
+    method: 'patch',
+    data
+  })
+}
+
+export function findParkingLotById(id) {
+  return request({
+    url: `/parkingLots/${id}`,
+    method: 'get'
+  })
+}
