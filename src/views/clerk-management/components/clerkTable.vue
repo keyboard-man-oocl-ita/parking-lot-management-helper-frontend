@@ -17,7 +17,7 @@
             v-if="scope.row.status=='已激活'"
             size="mini"
             type="danger"
-            :disabled="isCurrUser(scope.row)"
+            :disabled="isAdmin(scope.row)"
             @click="handleFreeze(scope.$index, scope.row)"
           >冻结
           </el-button>
@@ -27,7 +27,7 @@
     </el-table>
     <el-dialog title="修改权限" :visible.sync="dialogFormVisible">
       <el-form :model="permissionForm">
-        <el-form-item label="用户权限" :label-width="formLabelWidth">
+        <el-form-item label="用户权限" label-width="120px">
           <el-select v-model="permissionForm.role">
             <el-option label="clerk" value="1" />
             <el-option label="manager" value="2" />
@@ -59,9 +59,9 @@ export default {
   },
   computed: {
     ...mapGetters(['clerksCurrentPage']),
-    ...mapGetters(['clerks']),
+    ...mapGetters(['clerksForAdmin']),
     clerkShow() {
-      return this.clerks.slice(Math.max(0, this.clerksCurrentPage - 1) * 10, this.clerksCurrentPage * 10)
+      return this.clerksForAdmin.slice(Math.max(0, this.clerksCurrentPage - 1) * 10, this.clerksCurrentPage * 10)
     }
   },
   mounted() {
@@ -69,7 +69,7 @@ export default {
   },
   methods: {
     fetchData() {
-      this.$store.dispatch('clerk/loadClerks', { name: '', role: 0 })
+      this.$store.dispatch('adminClerks/loadClerksFromAdmin', { name: '', role: 0 })
     },
     handleEdit(index, row) {
       this.dialogFormVisible = true
@@ -77,16 +77,16 @@ export default {
       this.permissionForm.clerkId = row.clerkId
     },
     async handleFreeze(index, row) {
-      this.$store.dispatch('clerk/updateClerkStatus', row.clerkId)
+      this.$store.dispatch('adminClerks/updateClerkStatus', row.clerkId)
     },
-    isCurrUser(row) {
+    isAdmin(row) {
       if (row.role === 'admin') {
         return true
       }
       return false
     },
     async modifyPermission() {
-      this.$store.dispatch('clerk/modifyPermission', {
+      this.$store.dispatch('adminClerks/modifyPermission', {
         clerkId: this.permissionForm.clerkId,
         clerk: { role: this.permissionForm.role }
       })

@@ -2,12 +2,19 @@ import request from '@/utils/request'
 
 export function fetchClerk(params) {
   return request({
-    url: '/admin/clerks',
+    url: '/clerks/managers',
     method: 'get',
     params: params
   })
 }
 
+export function fetchClerkForAdmin(params) {
+  return request({
+    url: '/admin/clerks',
+    method: 'get',
+    params: params
+  })
+}
 export function addNewClerk(data) {
   return request({
     url: '/clerks',
