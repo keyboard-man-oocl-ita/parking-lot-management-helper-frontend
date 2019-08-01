@@ -74,7 +74,6 @@ export function findClerkByManagedBy() {
 }
 
 export function findClerkByCondition(data) {
-  debugger
   if (data.userName && data.phoneNumber) {
     return request({
       url: `/managers?name=${data.userName}&phoneNumber=${data.phoneNumber}`,
