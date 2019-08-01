@@ -15,7 +15,7 @@
       </el-table>
     </el-col>
 
-    <el-dialog title="修改停车场" :visible.sync="dialogFormVisible">
+    <el-dialog title="修改停车场" :visible.sync="dialogFormVisible" :before-close="clearAlterParkingLotContent">
       <el-form>
         <el-form-item label="停车场名字">
           <el-input v-model="alterParkingLot.name" autocomplete="off" />
@@ -25,7 +25,7 @@
         </el-form-item>
       </el-form>
       <div slot="footer" class="dialog-footer">
-        <el-button @click="dialogFormVisible = false">取 消</el-button>
+        <el-button @click="clearAlterParkingLotContent">取 消</el-button>
         <el-button type="primary" @click="alterParkingLotImpl">确 定</el-button>
       </div>
     </el-dialog>
@@ -91,7 +91,7 @@ export default {
       } else {
         alterParkingLot(this.alterParkingLotId, this.alterParkingLot).then(() => {
           this.$store.dispatch('parkingLot/loadParkingLotAct')
-          this.dialogFormVisible = false
+          this.clearAlterParkingLotContent()
           this.$message({
             message: '修改停车场成功',
             type: 'success'
@@ -101,6 +101,12 @@ export default {
           this.$message.error('修改失败')
         })
       }
+    },
+    clearAlterParkingLotContent() {
+      this.alterParkingLotId = ''
+      this.alterParkingLot.name = ''
+      this.alterParkingLot.capacity = ''
+      this.dialogFormVisible = false
     }
   }
 }
