@@ -26,6 +26,7 @@ const getters = {
   parkingLots: state => state.parkingLot.parkingLots,
   totalOfManager: state => state.manager.totalOfManager,
   currentPageOfManager: state => state.manager.currentPageOfManager,
-  managers: state => state.manager.managers
+  managers: state => state.manager.managers,
+  searching: state => state.parkingLot.searching
 }
 export default getters
