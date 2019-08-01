@@ -98,7 +98,7 @@ export default {
         if (valid) {
           this.dialogFormVisible = false
           const clerk = Object.assign({}, this.clerkForm)
-          this.$store.dispatch('clerk/addNewClerk', clerk)
+          this.$store.dispatch('adminClerks/addNewClerk', clerk)
         } else {
           return false
         }
@@ -119,7 +119,7 @@ export default {
         conditionRole = parseInt(this.searchClerkForm.condition)
       }
       const conditionName = this.searchClerkForm.text
-      await this.$store.dispatch('clerk/loadClerks', { name: conditionName, role: conditionRole })
+      await this.$store.dispatch('adminClerks/loadClerksFromAdmin', { name: conditionName, role: conditionRole })
     }
   }
 }

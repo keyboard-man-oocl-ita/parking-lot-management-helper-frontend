@@ -2,12 +2,19 @@ import request from '@/utils/request'
 
 export function fetchClerk(params) {
   return request({
-    url: '/admin/clerks',
+    url: '/clerks/managers',
     method: 'get',
     params: params
   })
 }
 
+export function fetchClerkForAdmin(params) {
+  return request({
+    url: '/admin/clerks',
+    method: 'get',
+    params: params
+  })
+}
 export function addNewClerk(data) {
   return request({
     url: '/clerks',
@@ -58,4 +65,36 @@ export function dispatchClerk(clerks) {
     method: 'patch',
     data: clerks
   })
+}
+
+export function findClerkByManagedBy() {
+  return request({
+    url: '/managers',
+    method: 'get'
+  })
+}
+
+export function findClerkByCondition(data) {
+  debugger
+  if (data.userName && data.phoneNumber) {
+    return request({
+      url: `/managers?name=${data.userName}&phoneNumber=${data.phoneNumber}`,
+      method: 'get'
+    })
+  } else if (data.userName) {
+    return request({
+      url: `/managers?name=${data.userName}`,
+      method: 'get'
+    })
+  } else if (data.phoneNumber) {
+    return request({
+      url: `/managers?phoneNumber=${data.phoneNumber}`,
+      method: 'get'
+    })
+  } else {
+    return request({
+      url: '/managers',
+      method: 'get'
+    })
+  }
 }
