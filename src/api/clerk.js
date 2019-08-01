@@ -1,10 +1,9 @@
 import request from '@/utils/request'
 
-export function fetchClerk(params) {
+export function fetchClerk() {
   return request({
-    url: '/clerks/managers',
-    method: 'get',
-    params: params
+    url: '/managers',
+    method: 'get'
   })
 }
 

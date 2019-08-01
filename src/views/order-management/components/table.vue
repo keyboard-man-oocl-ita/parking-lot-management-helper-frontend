@@ -65,7 +65,7 @@ export default {
     async patchOrder(order) {
       if (this.contentShow === '员工列表') {
         this.$store.dispatch('order/setOrderSelected', order)
-        await this.$store.dispatch('clerk/loadClerks', { name: '', role: 0 })
+        await this.$store.dispatch('clerk/loadClerks')
       } else if (this.contentShow === '员工电话') {
         const clerkId = order.clerkId
         const response = await this.$store.dispatch('clerk/loadClerkById', clerkId)
@@ -78,6 +78,10 @@ export default {
       order.clerkId = this.clerkSelectd
       order.status = 1
       this.$store.dispatch('order/updateOrder', order)
+      await this.$store.dispatch('order/loadOrders', {
+        carLicense: '',
+        status: -1
+      })
       this.dialogTableVisible = false
     }
   }
