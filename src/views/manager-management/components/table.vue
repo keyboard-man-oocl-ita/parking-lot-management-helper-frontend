@@ -58,7 +58,8 @@ export default {
       this.freeClerks = await this.$store.dispatch('manager/loadFreeClerks')
       this.clerksOfManager = await this.$store.dispatch('manager/loadClerksOf', id)
       this.freeClerksDTO = this.transformIdToKey(this.freeClerks)
-      this.clerksOfManagerDTO = this.transformIdToKey(this.clerksOfManager)
+      this.freeClerksDTO = this.freeClerksDTO.concat(this.transformIdToKey(this.clerksOfManager))
+      this.clerksOfManagerDTO = this.clerksOfManager.map(item => item.clerkId)
       this.dialogVisible = true
     },
     transformIdToKey(items) {
