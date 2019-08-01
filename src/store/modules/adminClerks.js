@@ -38,15 +38,15 @@ const actions = {
   },
   async updateClerkStatus({ dispatch }, clerkId) {
     await patchClerkStatus(clerkId)
-    dispatch('loadClerks', { name: '', role: 0 })
+    dispatch('loadClerksFromAdmin', { name: '', role: 0 })
   },
   async modifyPermission({ dispatch }, data) {
     await modifyPermission(data)
-    dispatch('loadClerks', { name: '', role: 0 })
+    dispatch('loadClerksFromAdmin', { name: '', role: 0 })
   },
   async addNewClerk({ dispatch }, data) {
     await addNewClerk(data)
-    dispatch('loadClerks', { name: '', role: 0 })
+    dispatch('loadClerksFromAdmin', { name: '', role: 0 })
   }
 }
 
