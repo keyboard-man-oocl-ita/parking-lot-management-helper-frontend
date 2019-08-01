@@ -15,6 +15,14 @@ export default {
   name: 'ManagerManagement',
   components: {
     ManagerManagementHeader, ManagerManagementFooter, ManagerManagementTable
+  },
+  mounted() {
+    this.loadAllManager()
+  },
+  methods: {
+    loadAllManager() {
+      this.$store.dispatch('manager/loadManager')
+    }
   }
 }
 </script>
