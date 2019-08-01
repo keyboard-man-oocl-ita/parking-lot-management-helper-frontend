@@ -21,6 +21,7 @@ const getters = {
   parkingLotsInDashboard: state => state.dashboard.parkingLotsInDashboard,
   totalOfParkingLotInDashboard: state => state.dashboard.totalOfParkingLotInDashboard,
   currentPageOfParkingLotInDashboard: state => state.dashboard.currentPageOfParkingLotInDashboard,
+  parkingLots: state => state.parkingLot.parkingLots,
   totalOfManager: state => state.manager.totalOfManager,
   currentPageOfManager: state => state.manager.currentPageOfManager,
   managers: state => state.manager.managers

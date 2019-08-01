@@ -1,5 +1,5 @@
 import { fetchClerk, fetchClerkById } from '@/api/clerk'
-import { addNewClerk, patchClerkStatus } from '../../api/clerk'
+import { addNewClerk, modifyPermission, patchClerkStatus } from '../../api/clerk'
 
 const state = {
   clerks: [],
@@ -38,6 +38,10 @@ const actions = {
   },
   async updateClerkStatus({ dispatch }, clerkId) {
     await patchClerkStatus(clerkId)
+    dispatch('loadClerks', { name: '', role: 0 })
+  },
+  async modifyPermission({ dispatch }, data) {
+    await modifyPermission(data)
     dispatch('loadClerks', { name: '', role: 0 })
   },
   async addNewClerk({ dispatch }, data) {
