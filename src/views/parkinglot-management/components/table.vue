@@ -7,7 +7,7 @@
         <el-table-column label="大小" prop="capacity" />
         <el-table-column align="right" label="操作">
           <template slot-scope="scope">
-            <el-button type="primary" @click="openDialogAndSetParkingLotId(scope.row.parkingLotId)">修改</el-button>
+            <el-button type="primary" @click="openDialogAndSetParkingLotId(scope.row)">修改</el-button>
             <el-button v-if="scope.row.status === 1" type="danger" @click="logoutOrActivateParkingLotImpl(scope.row)">注销</el-button>
             <el-button v-if="scope.row.status === 0" type="success" @click="logoutOrActivateParkingLotImpl(scope.row)">激活</el-button>
           </template>
@@ -59,9 +59,11 @@ export default {
     this.getParkingLots()
   },
   methods: {
-    openDialogAndSetParkingLotId(parkingLotId) {
+    openDialogAndSetParkingLotId(parkingLot) {
+      this.alterParkingLotId = parkingLot.parkingLotId
+      this.alterParkingLot.name = parkingLot.name
+      this.alterParkingLot.capacity = parkingLot.capacity
       this.dialogFormVisible = true
-      this.alterParkingLotId = parkingLotId
     },
     async getParkingLots() {
       await this.$store.dispatch('parkingLot/loadParkingLotAct')
