@@ -59,3 +59,35 @@ export function dispatchClerk(clerks) {
     data: clerks
   })
 }
+
+export function findClerkByManagedBy() {
+  return request({
+    url: '/managers',
+    method: 'get'
+  })
+}
+
+export function findClerkByCondition(data) {
+  debugger
+  if (data.userName && data.phoneNumber) {
+    return request({
+      url: `/managers?name=${data.userName}&phoneNumber=${data.phoneNumber}`,
+      method: 'get'
+    })
+  } else if (data.userName) {
+    return request({
+      url: `/managers?name=${data.userName}`,
+      method: 'get'
+    })
+  } else if (data.phoneNumber) {
+    return request({
+      url: `/managers?phoneNumber=${data.phoneNumber}`,
+      method: 'get'
+    })
+  } else {
+    return request({
+      url: '/managers',
+      method: 'get'
+    })
+  }
+}
