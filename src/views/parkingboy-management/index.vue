@@ -49,7 +49,7 @@
 
 <script>
 import { findClerkByManagedBy, findClerkByCondition } from '@/api/clerk'
-import { loadParkingLots, updateParkingLotManagedBy, loadParkingLotDashboard } from '@/api/parkingLot'
+import { loadParkingLotsWithoutManager, updateParkingLotManagedBy, loadParkingLotDashboard } from '@/api/parkingLot'
 import Pagination from '@/components/Pagination'
 
 export default {
@@ -89,7 +89,7 @@ export default {
       })
     },
     getParkinglots() {
-      loadParkingLots().then(res => {
+      loadParkingLotsWithoutManager().then(res => {
         this.tableData.forEach(item => {
           item.transferData = this.generateData(res)
         })

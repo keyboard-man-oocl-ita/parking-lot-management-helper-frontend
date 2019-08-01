@@ -7,6 +7,13 @@ export function loadParkingLots() {
   })
 }
 
+export function loadParkingLotsWithoutManager() {
+  return request({
+    url: '/parkingLots',
+    method: 'get'
+  })
+}
+
 export function createParkingLot(data) {
   return request({
     url: '/parkingLots',
