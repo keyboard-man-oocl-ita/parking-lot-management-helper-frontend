@@ -66,7 +66,9 @@ export default {
   },
   methods: {
     loadConditionalParkingLotsImpl() {
-      loadConditionalParkingLots(this.parkingLotName, this.lowerLimit, this.upperLimit).then((res) => {
+      const finalLowerLimit = this.lowerLimit === '' ? -1 : this.lowerLimit
+      const finalUpperLimit = this.upperLimit === '' ? -1 : this.upperLimit
+      loadConditionalParkingLots(this.parkingLotName, finalLowerLimit, finalUpperLimit).then((res) => {
         this.$store.commit('parkingLot/LOAD_PARKING_LOT', res)
         this.$message({
           message: '搜索成功',
@@ -88,6 +90,9 @@ export default {
     },
     refresh() {
       this.$store.dispatch('parkingLot/loadParkingLotAct').then(() => {
+        this.lowerLimit = ''
+        this.upperLimit = ''
+        this.parkingLotName = ''
         this.$message({
           message: '刷新成功',
           type: 'success'
